@@ -35,4 +35,4 @@ function asyncHandler(cb) {
 
 // // Course route
 
-// module.exports = router;
+module.exports = router;

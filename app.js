@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 
 // add Routes -me 
-app.use('/api', indexRouter);
+app.use('/api', routes);
 
 
 
