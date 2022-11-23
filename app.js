@@ -4,31 +4,25 @@
 const express = require('express');
 const morgan = require('morgan');
 
+const routes = require("./routes");
+
 // variable to enable global error logging
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
 
-// create the Express app
+// create the Express app -me
 const app = express();
 
-// me- data base connection.
-const Sequelize = require('./models/index.js').sequelize;
-(async () => {
-  try {
-    await Sequelize.sync();
-    await Sequelize.authenticate();
-    console.log('Connection to the database successful!');
-  } catch (error) {
-    console.error('Error connecting to the database: ', error);
-  }
-})();
+// Setup request body JSON parsing -me
+app.use(express.json());
+
+// add Routes -me 
+app.use('/api', indexRouter);
 
 
 
 
-
-
-
-
+// me Setup request body JSON parsing.
+app.use(express.json());
 
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
@@ -59,6 +53,19 @@ app.use((err, req, res, next) => {
   });
 });
 
+// me- data base connection.
+const Sequelize = require('./models/index.js').sequelize;
+
+(async () => {
+  try {
+    await Sequelize.sync();
+    await Sequelize.authenticate();
+    console.log('Connection to the database successful!');
+  } catch (error) {
+    console.error('Error connecting to the database: ', error);
+  }
+})();
+
 // set our port
 app.set('port', process.env.PORT || 5000);
 
@@ -66,3 +73,5 @@ app.set('port', process.env.PORT || 5000);
 const server = app.listen(app.get('port'), () => {
   console.log(`Express server is listening on port ${server.address().port}`);
 });
+
+module.exports = app;

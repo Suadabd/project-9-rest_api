@@ -22,13 +22,13 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.TEXT,
       // allowNull defaults to true
+      allowNull: false
   }, 
     estimatedTime: {
       type: DataTypes.STRING,
   },
   materialsNeeded: {
       type: DataTypes.STRING,
-      allowNull: false
   },
   }, {
     sequelize, // pass connection instance
