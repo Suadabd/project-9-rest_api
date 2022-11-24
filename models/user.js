@@ -1,6 +1,6 @@
 'use strict';
 
-// const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 const {
   Model
@@ -75,7 +75,9 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
-   { sequelize });
+   { sequelize, // pass connection instance
+     modelName: 'User', // chosen modal name
+   });
 
    // Other model options go here
    User.associate = (models) => {

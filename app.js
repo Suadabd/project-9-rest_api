@@ -15,9 +15,9 @@ const app = express();
 // Setup request body JSON parsing -me
 app.use(express.json());
 
-// add Routes -me 
-app.use('/api', routes);
 
+// Add routes. - me
+app.use('/api', routes);
 
 
 

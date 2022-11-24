@@ -21,18 +21,36 @@ function asyncHandler(cb) {
     };
   }
   
-// // // User routes
-// // // Route that returns the current authenticated user along with 200http status code.
-// // router.get('/users', authenticateUser, asyncHandler(async (req,res) => {
+// User routes
+// Route that returns the current authenticated user along with 200http status code.
+router.get('/users', authenticateUser, asyncHandler(async (req,res) => {
     
-// //     //retrive current authenticated user's info from req object 'currentUser' property:
-// //     const user = req.currentUser; //will set currentUser prop if and only succfully authenticated.
-// //     // console.log(user);
+    //retrive current authenticated user's info from req object 'currentUser' property:
+    const user = req.currentUser; //will set currentUser prop if and only succfully authenticated.
+    // console.log(user);
 
-// //     // response object json method to return current user info formatted in json.
-// //     res.status(200).json(user);
-// // }));
+    // response object json method to return current user info formatted in json.
+    res.status(200).json(user);
+}));
 
-// // Course route
+// Post route that will create new user. Set location header to "/" and return 201 status code w no content.
+
+router.post('/users', asyncHandler(async(req, res) => {
+    try { 
+    const newUser = await User.create(req.body);
+    res.location("/").status(201).end(); // return 
+    } catch (error) {
+        if(error.name === "SequelizeValidationError") { // checking the error
+        
+
+    }
+}
+}));
+
+// Course route
+
+
+
+
 
 module.exports = router;
